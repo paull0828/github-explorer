@@ -13,10 +13,16 @@ const RepoPage = () => {
     const fetchRepo = async () => {
       try {
         const response = await axios.get(
-          `https://api.github.com/repos/${owner}/${repo}`
+          `https://api.github.com/repos/${owner}/${repo}`,
+          {
+            headers: {
+              Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+            },
+          }
         );
         setRepoData(response.data);
       } catch (err) {
+        console.error(err);
         setError("Repository not found or API error.");
       } finally {
         setLoading(false);
@@ -26,7 +32,7 @@ const RepoPage = () => {
     fetchRepo();
   }, [owner, repo]);
 
-  if (loading) return <div className="loader"></div>;
+  if (loading) return <div className="loader">Loading...</div>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return <RepoDetails repo={repoData} />;
