@@ -13,12 +13,7 @@ const RepoPage = () => {
     const fetchRepo = async () => {
       try {
         const response = await axios.get(
-          `https://api.github.com/repos/${owner}/${repo}`,
-          {
-            headers: {
-              Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
-            },
-          }
+          `https://api.github.com/repos/${owner}/${repo}`
         );
         setRepoData(response.data);
       } catch (err) {

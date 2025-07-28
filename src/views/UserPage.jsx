@@ -13,14 +13,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(
-          `https://api.github.com/users/${username}`,
-          {
-            headers: {
-              Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
-            },
-          }
-        );
+        const res = await axios.get(`https://api.github.com/users/${username}`);
         setUser(res.data);
       } catch (err) {
         setError("User not found or API error.");
