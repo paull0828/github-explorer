@@ -30,7 +30,7 @@ const UserPage = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [username]);
 
   if (loading) return <div className="loader"></div>;
   if (error)
